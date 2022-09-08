@@ -125,7 +125,7 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Int {
+fun accountInThreeYears(initial: Int, percent: Int): Int = TODO()/**{
     val bankCoefficient = 1 + (percent / 100)
     val bankFirstYear = (initial * bankCoefficient).toInt()
     val bankSecondYear = (bankFirstYear * bankCoefficient).toInt()
@@ -134,7 +134,7 @@ fun accountInThreeYears(initial: Int, percent: Int): Int {
 
 
 }
-
+*/
 /**
  * Простая (2 балла)
  *
