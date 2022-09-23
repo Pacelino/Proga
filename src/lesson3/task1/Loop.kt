@@ -2,7 +2,8 @@
 
 package lesson3.task1
 
-import kotlin.math.sqrt
+import kotlin.math.roundToInt
+import kotlin.math.*
 
 // Урок 3: циклы
 // Максимальное количество баллов = 9
@@ -72,7 +73,17 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var count = 0
+    var number = n
+    if (n == 0) return 1
+    while (number > 0) {
+        count++
+        number /= 10
+    }
+    return count
+}
+
 
 /**
  * Простая (2 балла)
@@ -87,14 +98,41 @@ fun fib(n: Int): Int = TODO()
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var Del: Array<Int> = arrayOf()
+    val number = n.toDouble()
+    val sqrtNumber = kotlin.math.sqrt(number).toInt()
+    for (i in 2..sqrtNumber + 1) {
+        if (n % i == 0) {
+            Del += i
+            if (i != n / i) Del += n / i
+        }
+    }
+    if (n == 2) return 2
+    if (Del.size == 0) return n
+    return Del.sorted()[0]
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    var Del: Array<Int> = arrayOf()
+    val number = n.toDouble()
+    val sqrtNumber = kotlin.math.sqrt(number).toInt()
+    for (i in 2..sqrtNumber + 1) {
+        if (n % i == 0) {
+            Del += i
+            Del += n / i
+        }
+    }
+    if (Del.size == 0) return 1
+    val SortedDel = Del.sorted()
+    val ReversSorted = SortedDel.reversed()
+    return ReversSorted[0]
+}
 
 /**
  * Простая (2 балла)
@@ -120,8 +158,18 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    var n1 = n
+    var n2 = m
 
+    while (n1 != n2) {
+        if (n1 > n2)
+            n1 -= n2
+        else
+            n2 -= n1
+    }
+    return (m * n) / n1.toInt()
+}
 /**
  * Средняя (3 балла)
  *
