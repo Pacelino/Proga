@@ -91,7 +91,10 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int{
+    if (n > 2) return fib(n - 1) + fib(n - 2)
+    else return 1
+}
 
 /**
  * Простая (2 балла)
@@ -177,8 +180,17 @@ fun lcm(m: Int, n: Int): Int {
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
-
+fun isCoPrime(m: Int, n: Int): Boolean {
+    var n1 = n
+    var n2 = m
+    while (n1 != n2) {
+        if (n1 > n2)
+            n1 -= n2
+        else
+            n2 -= n1
+    }
+    return n1 == 1
+}
 /**
  * Средняя (3 балла)
  *
@@ -186,7 +198,16 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var arr = mutableListOf<Int>()
+    var number = n
+    while (number != 0) {
+        arr += number % 10
+        number /= 10
+    }
+
+ return 1
+}
 
 /**
  * Средняя (3 балла)
@@ -197,7 +218,15 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    var arr = mutableListOf<Int>()
+    var number = n
+    while (number != 0) {
+        arr += number % 10
+        number /= 10
+    }
+    return arr == arr.reversed()
+}
 
 /**
  * Средняя (3 балла)
@@ -207,7 +236,19 @@ fun isPalindrome(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    var arr = mutableListOf<Int>()
+    var number = n
+    while (number != 0) {
+        arr += number % 10
+        number /= 10
+    }
+    val listSize = arr.size
+    for (i in 0 ..listSize - 1) {
+        println(arr[i])
+    }
+    return false
+}
 
 /**
  * Средняя (4 балла)
