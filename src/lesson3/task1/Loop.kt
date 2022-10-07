@@ -91,7 +91,7 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int{
+fun fib(n: Int): Int {
     if (n > 2) return fib(n - 1) + fib(n - 2)
     else return 1
 }
@@ -122,7 +122,7 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    var Del: Array<Int> = arrayOf()
+    var Del = mutableListOf<Int>()
     val number = n.toDouble()
     val sqrtNumber = kotlin.math.sqrt(number).toInt()
     for (i in 2..sqrtNumber + 1) {
@@ -131,10 +131,10 @@ fun maxDivisor(n: Int): Int {
             Del += n / i
         }
     }
-    if (Del.size == 0) return 1
     val SortedDel = Del.sorted()
-    val ReversSorted = SortedDel.reversed()
-    return ReversSorted[0]
+    if (Del.size == 0) return 1
+    if (SortedDel.last() < n) return SortedDel.last()
+    return 1
 }
 
 /**
@@ -146,7 +146,7 @@ fun maxDivisor(n: Int): Int {
  *     Xслед = X /2
  *   ИНАЧЕ
  *     Xслед = 3 * X + 1
- *
+ *z`
  * например
  *   15 46 23 70 35 106 53 160 80 40 20 10 5 16 8 4 2 1 4 2 1 4 2 1 ...
  * Данная последовательность рано или поздно встречает X == 1.
@@ -199,14 +199,14 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun revert(n: Int): Int {
-    var arr = mutableListOf<Int>()
     var number = n
+    var reversed = 0
     while (number != 0) {
-        arr += number % 10
+        val r = number % 10
+        reversed = reversed * 10 + r
         number /= 10
     }
-
- return 1
+    return reversed
 }
 
 /**
