@@ -54,8 +54,7 @@ class Tests {
         assertEquals(13, seconds(0, 0, 13))
     }
 
-    @Test
-    @Tag("1")
+    @Test @Tag("1")
     fun lengthInMeters() {
         assertEquals(18.98, lengthInMeters(8, 2, 11), 1e-2)
         assertEquals(2.13, lengthInMeters(1, 0, 0), 1e-2)

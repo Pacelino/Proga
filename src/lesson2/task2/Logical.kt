@@ -24,8 +24,8 @@ fun isNumberHappy(number: Int): Boolean {
     val secondNumber = (number % 1000 - number % 100) / 100
     val thirdNumber = (number % 100 - number % 10) / 10
     val lastNumber = number % 10
-    if (firstNumber + secondNumber == thirdNumber + lastNumber) return true
-    return false
+    return (firstNumber + secondNumber == thirdNumber + lastNumber)
+
 }
 
 /**
@@ -45,11 +45,8 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
 fun daysInMonth(month: Int, year: Int): Int{
-    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
-        return when (month) {
-            2 -> 29
-            else -> 0
-        }
+    if (year % 4 == 0 && year % 100 != 0 && month == 2 || year % 400 == 0 ) {
+        return 29
     } else {
         return when (month) {
             1 -> 31
@@ -82,11 +79,7 @@ fun circleInside(
     x2: Double, y2: Double, r2: Double
 ): Boolean {
     val distSq = kotlin.math.sqrt(((x1 - x2).pow(2)) + ((y1 - y2).pow(2)))
-    return when {
-        distSq + r1 <= r2 -> true
-        else -> false
-    }
-
+    return distSq + r1 <= r2
 }
 
 /**
@@ -95,7 +88,7 @@ fun circleInside(
  * Определить, пройдет ли кирпич со сторонами а, b, c сквозь прямоугольное отверстие в стене со сторонами r и s.
  * Стороны отверстия должны быть параллельны граням кирпича.
  * Считать, что совпадения длин сторон достаточно для прохождения кирпича, т.е., например,
- * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
+ * кирпич 4 х 4 0х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
