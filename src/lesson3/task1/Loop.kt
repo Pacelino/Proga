@@ -2,7 +2,6 @@
 
 package lesson3.task1
 
-import kotlin.math.roundToInt
 import kotlin.math.*
 
 // Урок 3: циклы
@@ -92,8 +91,16 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    if (n > 2) return fib(n - 1) + fib(n - 2)
-    else return 1
+    var fib1 = 1
+    var fib2 = 1
+    var i = 0
+    while (i < n - 2) {
+        val fibSum = fib1 + fib2
+        fib1 = fib2
+        fib2 = fibSum
+        i += 1
+    }
+    return fib2
 }
 
 /**
@@ -102,18 +109,12 @@ fun fib(n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var Del: Array<Int> = arrayOf()
-    val number = n.toDouble()
-    val sqrtNumber = kotlin.math.sqrt(number).toInt()
-    for (i in 2..sqrtNumber + 1) {
-        if (n % i == 0) {
-            Del += i
-            if (i != n / i) Del += n / i
-        }
-    }
     if (n == 2) return 2
-    if (Del.size == 0) return n
-    return Del.sorted()[0]
+    for (i in 2 .. kotlin.math.sqrt(n.toDouble()).toInt()) {
+        if (n % i == 0)
+            return i
+    }
+    return n
 }
 
 /**
@@ -122,19 +123,7 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    var Del = mutableListOf<Int>()
-    val number = n.toDouble()
-    val sqrtNumber = kotlin.math.sqrt(number).toInt()
-    for (i in 2..sqrtNumber + 1) {
-        if (n % i == 0) {
-            Del += i
-            Del += n / i
-        }
-    }
-    val SortedDel = Del.sorted()
-    if (Del.size == 0) return 1
-    if (SortedDel.last() < n) return SortedDel.last()
-    return 1
+    return n / minDivisor(n)
 }
 
 /**
@@ -219,13 +208,7 @@ fun revert(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun isPalindrome(n: Int): Boolean {
-    var arr = mutableListOf<Int>()
-    var number = n
-    while (number != 0) {
-        arr += number % 10
-        number /= 10
-    }
-    return arr == arr.reversed()
+    return n == revert(n)
 }
 
 /**
@@ -237,15 +220,15 @@ fun isPalindrome(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun hasDifferentDigits(n: Int): Boolean {
-    var arr = mutableListOf<Int>()
     var number = n
-    while (number != 0) {
-        arr += number % 10
+    var r = 0
+    if (n <= 9) return false
+    while (number > 0) {
+        val res = r
+        r = number % 10
         number /= 10
-    }
-    val listSize = arr.size
-    for (i in 0 ..listSize - 1) {
-        println(arr[i])
+        if (res == 0) continue
+        if (r != res) return true
     }
     return false
 }

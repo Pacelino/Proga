@@ -25,7 +25,6 @@ fun isNumberHappy(number: Int): Boolean {
     val thirdNumber = (number % 100 - number % 10) / 10
     val lastNumber = number % 10
     return (firstNumber + secondNumber == thirdNumber + lastNumber)
-
 }
 
 /**
@@ -49,18 +48,9 @@ fun daysInMonth(month: Int, year: Int): Int{
         return 29
     } else {
         return when (month) {
-            1 -> 31
+            1, 3, 5, 7, 8, 10, 12 -> 31
             2 -> 28
-            3 -> 31
-            4 -> 30
-            5 -> 31
-            6 -> 30
-            7 -> 31
-            8 -> 31
-            9 -> 30
-            10 -> 31
-            11 -> 30
-            12 -> 31
+            4, 6, 9, 10 -> 30
             else -> 0
         }
     }
