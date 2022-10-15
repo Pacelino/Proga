@@ -244,8 +244,46 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
-
+fun wordsTonum(str: String): Int {
+    return when (str) {
+        "a" -> 10
+        "b" -> 11
+        "c" -> 12
+        "d" -> 13
+        "e" -> 14
+        "f" -> 15
+        "g" -> 16
+        "h" -> 17
+        "i" -> 18
+        "j" -> 19
+        "k" -> 20
+        "l" -> 21
+        "m" -> 22
+        "n" -> 23
+        "o" -> 24
+        "p" -> 25
+        "q" -> 26
+        "r" -> 27
+        "s" -> 28
+        "t" -> 29
+        "u" -> 30
+        "v" -> 31
+        "w" -> 32
+        "x" -> 33
+        "y" -> 34
+        "z" -> 35
+        else -> str.toInt()
+    }
+}
+fun decimalFromString(str: String, base: Int): Int {
+    val str = str.split("").subList(1, str.lastIndex + 2)
+    val strRevers = str.map{ it -> wordsTonum(it)}.reversed()
+    var result = 0
+    for (i in 0 until str.size) {
+        result += base.toDouble().pow(i).toInt() * strRevers[i]
+    }
+    return result
+}
 /**
  * Сложная (5 баллов)
  *
@@ -263,67 +301,5 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun UnderHundred(n: Int, toushand: Boolean): MutableList<String> {
-    val res = mutableListOf<String>()
-    res.add(
-        when (n / 100) {
-            1 -> "сто"
-            2 -> "двести"
-            3 -> "триста"
-            4 -> "четыреста"
-            5 -> "пятьсот"
-            6 -> "шестьсот"
-            7 -> "семьсот"
-            8 -> "восемьсот"
-            9 -> "девятьсот"
-            else -> ""
-        }
-    )
-    if ((10 < n % 100) && (n % 100 < 20)) {
-        res.add(
-            when (n % 10) {
-                1 -> "одиннадцать"
-                2 -> "двенадцать"
-                3 -> "тринадцать"
-                4 -> "четырнадцать"
-                5 -> "пятнадцать"
-                6 -> "шестнадцать"
-                7 -> "семнадцать"
-                8 -> "восемнадцать"
-                9 -> "девятнадцать"
-                else -> ""
-            }
-        )
-        res.add(
-            when (n % 100 / 10) {
-                1 -> "десять"
-                2 -> "двадцать"
-                3 -> "тридцать"
-                4 -> "сорок"
-                5 -> "пятьдесят"
-                6 -> "шестьдесят"
-                7 -> "семьдесят"
-                8 -> "восемьдесят"
-                9 -> "девяносто"
-                else -> ""
-            }
-        )
-        res.add(
-            when (n % 10) {
-                1 -> if (toushand) "одна" else "один"
-                2 -> if (toushand) "две" else "да"
-                3 -> "три"
-                4 -> "четыре"
-                5 -> "пять"
-                6 -> "шесть"
-                7 -> "семь"
-                8 -> "восемь"
-                9 -> "девять"
-                else -> ""
-            }
-        )
-    }
-    return res
-}
 
 fun russian(n: Int): String = TODO()

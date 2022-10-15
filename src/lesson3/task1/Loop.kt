@@ -246,7 +246,6 @@ fun sin(x: Double, eps: Double): Double {
         sin += p
         n += 2
     }
-    sin = (sin * 100).roundToInt() / 100.0
     if (abs(sin) <= 1) return sin else return 0.0
 }
 
