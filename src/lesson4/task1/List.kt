@@ -278,11 +278,11 @@ fun wordsTonum(str: String): Int {
 fun decimalFromString(str: String, base: Int): Int {
     val str = str.split("").subList(1, str.lastIndex + 2)
     val strRevers = str.map{ it -> wordsTonum(it)}.reversed()
-    var result = 0
+    var result = 0.0
     for (i in 0 until str.size) {
-        result += base.toDouble().pow(i).toInt() * strRevers[i]
+        result += base.toDouble().pow(i) * strRevers[i]
     }
-    return result
+    return result.toInt()
 }
 /**
  * Сложная (5 баллов)
