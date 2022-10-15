@@ -160,7 +160,7 @@ fun lcm(m: Int, n: Int): Int {
         else
             n2 -= n1
     }
-    return (m * n) / n1.toInt()
+    return (m * n) / n1
 }
 /**
  * Средняя (3 балла)
@@ -207,9 +207,7 @@ fun revert(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean {
-    return n == revert(n)
-}
+fun isPalindrome(n: Int): Boolean = n == revert(n)
 
 /**
  * Средняя (3 балла)
@@ -242,7 +240,18 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+fun sin(x: Double, eps: Double): Double {
+    var p = x
+    var sin = x
+    var n = 2
+    while (abs(p) > eps) {
+        p = -p * x * x / (n * (n + 1))
+        sin += p
+        n += 2
+    }
+    if (abs(sin.toDouble()) <= 1) return sin.toDouble()
+    else return 0.0
+}
 
 /**
  * Средняя (4 балла)
