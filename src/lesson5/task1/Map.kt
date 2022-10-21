@@ -285,6 +285,12 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
         if (list[i] + list[j] == number) return Pair(i, j)
         else j -= 1
     }
+    while (i < list.size) {
+        j = list.size - 1
+        val r = list[i] + list[j]
+        if (list[i] + list[j] == number) return Pair(i, j)
+        else i += 1
+    }
     return Pair(-1, -1)
 }
 
