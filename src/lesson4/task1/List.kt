@@ -303,7 +303,7 @@ fun roman(n: Int): String {
             result += rimNumber[i]
             a -= defNumber[i]
         }
-        i++
+        i += 1
     }
     return result
 }
