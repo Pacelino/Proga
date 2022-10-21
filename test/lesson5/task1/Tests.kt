@@ -314,7 +314,21 @@ class Tests {
         )
         assertEquals(
             Pair(1, 2),
-            findSumOfTwo(listOf(1, 0, 0), 0)
+            findSumOfTwo(listOf(1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1), 0)
         )
     }
 
