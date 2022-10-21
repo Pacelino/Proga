@@ -277,7 +277,7 @@ fun wordsTonum(str: String): Int {
 }
 fun decimalFromString(str: String, base: Int): Int {
     val str = str.split("").subList(1, str.lastIndex + 2)
-    val strRevers = str.map{ it -> wordsTonum(it)}.reversed()
+    val strRevers = str.map { it -> wordsTonum(it)}.reversed()
     var result = 0
     for (i in 0 until str.size) {
         result += base.toDouble().pow(i).toInt() * strRevers[i]
@@ -292,7 +292,21 @@ fun decimalFromString(str: String, base: Int): Int {
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String {
+    val rimNumber = listOf("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+    val defNumber = listOf(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+    var result = ""
+    var a = n
+    var i = 0
+    while (a > 0) {
+        while (a - defNumber[i] >= 0) {
+            result += rimNumber[i]
+            a -= defNumber[i]
+        }
+        i++
+    }
+    return result
+}
 
 /**
  * Очень сложная (7 баллов)
