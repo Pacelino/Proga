@@ -121,11 +121,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double {
-    var r = v.map { it.pow(2) }
-    return kotlin.math.sqrt(r.sum())
-}
-
+fun abs(v: List<Double>): Double = kotlin.math.sqrt(v.map{it.pow(2)}.sum())
 
 /**
  * Простая (2 балла)
@@ -152,15 +148,9 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
 fun times(a: List<Int>, b: List<Int>): Int {
-    var i = 0
-    var c = 0
-    while (i < a.size){
-        c += a[i] * b[i]
-        i += 1
-    }
-    return c
+    val l = a.mapIndexed{index, i -> i * b[index]}
+    return l.fold(0){el1 , el2 -> el1 + el2}
 }
-
 /**
  * Средняя (3 балла)
  *
@@ -244,45 +234,56 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun wordsTonum(str: String): Int {
-    return when (str) {
-        "a" -> 10
-        "b" -> 11
-        "c" -> 12
-        "d" -> 13
-        "e" -> 14
-        "f" -> 15
-        "g" -> 16
-        "h" -> 17
-        "i" -> 18
-        "j" -> 19
-        "k" -> 20
-        "l" -> 21
-        "m" -> 22
-        "n" -> 23
-        "o" -> 24
-        "p" -> 25
-        "q" -> 26
-        "r" -> 27
-        "s" -> 28
-        "t" -> 29
-        "u" -> 30
-        "v" -> 31
-        "w" -> 32
-        "x" -> 33
-        "y" -> 34
-        "z" -> 35
-        else -> str.toInt()
-    }
-}
+//fun wordsTonum(str: String): Int {
+// return when (str) {
+//        "a" -> 10
+//        "b" -> 11
+//        "c" -> 12
+//        "d" -> 13
+//        "e" -> 14
+//        "f" -> 15
+//        "g" -> 16
+//        "h" -> 17
+//        "i" -> 18
+//        "j" -> 19
+//        "k" -> 20
+//        "l" -> 21
+//        "m" -> 22
+//        "n" -> 23
+//        "o" -> 24
+//        "p" -> 25
+//        "q" -> 26
+//        "r" -> 27
+//        "s" -> 28
+//        "t" -> 29
+//        "u" -> 30
+//        "v" -> 31
+//        "w" -> 32
+//        "x" -> 33
+//        "y" -> 34
+//        "z" -> 35
+//        else -> str.toInt()
+//    }
+//}
 fun decimalFromString(str: String, base: Int): Int {
-    val str = str.split("").subList(1, str.lastIndex + 2)
-    val strRevers = str.map { it -> wordsTonum(it)}.reversed()
+//    val str = str.split("").subList(1, str.lastIndex + 2)
+//    val strRevers = str.map { it -> wordsTonum(it)}.reversed()
+//    var result = 0
+//    for (i in 0 until str.size) {
+//        result += base.toDouble().pow(i).toInt() * strRevers[i]
+//    }
+    var l1 = listOf("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w", "x", "y", "z")
+    var l2 = listOf(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35)
     var result = 0
-    for (i in 0 until str.size) {
-        result += base.toDouble().pow(i).toInt() * strRevers[i]
+
+    // сс больше 10
+    for (i in 0 until str.length) {
+        val indexStr = l1.indexOf(str[i].toString())
+        val strTonum = l2[indexStr]
+        println(strTonum)
+
     }
-    return result
+    return 1
 }
 /**
  * Сложная (5 баллов)
