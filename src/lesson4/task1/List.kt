@@ -234,24 +234,56 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-
+//fun wordsTonum(str: String): Int {
+// return when (str) {
+//        "a" -> 10
+//        "b" -> 11
+//        "c" -> 12
+//        "d" -> 13
+//        "e" -> 14
+//        "f" -> 15
+//        "g" -> 16
+//        "h" -> 17
+//        "i" -> 18
+//        "j" -> 19
+//        "k" -> 20
+//        "l" -> 21
+//        "m" -> 22
+//        "n" -> 23
+//        "o" -> 24
+//        "p" -> 25
+//        "q" -> 26
+//        "r" -> 27
+//        "s" -> 28
+//        "t" -> 29
+//        "u" -> 30
+//        "v" -> 31
+//        "w" -> 32
+//        "x" -> 33
+//        "y" -> 34
+//        "z" -> 35
+//        else -> str.toInt()
+//    }
+//}
 fun decimalFromString(str: String, base: Int): Int {
+//    val str = str.split("").subList(1, str.lastIndex + 2)
+//    val strRevers = str.map { it -> wordsTonum(it)}.reversed()
+//    var result = 0
+//    for (i in 0 until str.size) {
+//        result += base.toDouble().pow(i).toInt() * strRevers[i]
+//    }
     var l1 = listOf("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w", "x", "y", "z")
     var l2 = listOf(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35)
     var result = 0
-    var m = mutableListOf<Int>()
-    var mReversed = mutableListOf<Int>()
+
     // сс больше 10
     for (i in 0 until str.length) {
         val indexStr = l1.indexOf(str[i].toString())
         val strTonum = l2[indexStr]
-        m.add(strTonum)
-        mReversed = m.asReversed()
+        println(strTonum)
+
     }
-    for (i in 0 until m.size) {
-        result += base.toDouble().pow(i).toInt() * mReversed[i]
-    }
-    return result
+    return 1
 }
 /**
  * Сложная (5 баллов)
