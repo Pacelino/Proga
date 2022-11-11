@@ -266,24 +266,22 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
 //    }
 //}
 fun decimalFromString(str: String, base: Int): Int {
-//    val str = str.split("").subList(1, str.lastIndex + 2)
-//    val strRevers = str.map { it -> wordsTonum(it)}.reversed()
-//    var result = 0
-//    for (i in 0 until str.size) {
-//        result += base.toDouble().pow(i).toInt() * strRevers[i]
-//    }
     var l1 = listOf("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w", "x", "y", "z")
     var l2 = listOf(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35)
     var result = 0
-
+    var m = mutableListOf<Int>()
+    var mReversed = mutableListOf<Int>()
     // сс больше 10
     for (i in 0 until str.length) {
         val indexStr = l1.indexOf(str[i].toString())
         val strTonum = l2[indexStr]
-        println(strTonum)
-
+        m.add(strTonum)
+        mReversed = m.asReversed()
     }
-    return 1
+    for (i in 0 until m.size) {
+        result += base.toDouble().pow(i).toInt() * mReversed[i]
+    }
+    return result
 }
 /**
  * Сложная (5 баллов)
