@@ -280,4 +280,19 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    if (n <= 6) return fib(n)
+    var number = 6
+    var count = 6
+    var fibNumber = 1
+    var digitsInNumber = 1
+    while (count < n) {
+        number += 1
+        fibNumber = fib(number)
+        digitsInNumber = digitNumber(fibNumber)
+        count += digitsInNumber
+    }
+    val digitPosition = digitsInNumber - count + n
+    val position = (digitsInNumber - digitPosition).toDouble()
+    return (fibNumber / 10.0.pow(position)).toInt() % 10
+}
