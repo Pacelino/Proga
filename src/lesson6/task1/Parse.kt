@@ -174,7 +174,21 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    if (!Regex("""\S+ \d+(\.\d+)?(; \S+ \d+(\.\d+)?)*""").matches(description)) return ""
+    val products = description.split(";")
+    var maxCost = 0.0
+    var maxCostName = ""
+    for (i in products) {
+        if (i == "") break
+        val product = i.trim().split(" ")
+        if (product[1].toDouble() > maxCost) {
+            maxCost = product[1].toDouble()
+            maxCostName = product[0]
+        }
+    }
+    return maxCostName
+}
 
 /**
  * Сложная (6 баллов)
