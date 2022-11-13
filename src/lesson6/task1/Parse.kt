@@ -2,6 +2,7 @@
 
 package lesson6.task1
 
+import lesson8.task2.rookMoveNumber
 import kotlin.math.max
 
 // Урок 6: разбор строк, исключения
@@ -186,7 +187,29 @@ fun mostExpensive(description: String): String = TODO()
  *
  * Вернуть -1, если roman не является корректным римским числом
  */
-fun fromRoman(roman: String): Int = TODO()
+fun fromRoman(roman: String): Int {
+    if (roman == "") return -1
+
+    if (Regex("""[^IVXLCDM]+""").matches(roman)) {
+        return -1
+    }
+
+    val numbers = mapOf('I' to 1, 'V' to 5, 'X' to 10, 'L' to 50, 'C' to 100, 'D' to 500, 'M' to 1000)
+    var result = 0
+    for (i in 0..roman.length - 2) {
+        if (!numbers.containsKey(roman[i])) return -1
+        if (numbers[roman[i]]!! < numbers[roman[i + 1]]!!) {
+            result -= numbers[roman[i]]!!
+        } else {
+            result += numbers[roman[i]]!!
+        }
+    }
+
+    if (!numbers.containsKey(roman.last())) return -1
+    result += numbers[roman.last()]!!
+
+    return result
+}
 
 /**
  * Очень сложная (7 баллов)
