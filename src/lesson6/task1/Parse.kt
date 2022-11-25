@@ -190,7 +190,7 @@ fun mostExpensive(description: String): String {
     }
     println("название: $nameProductList цена: $priceList")
     val minCost = priceList.max()
-    if (minCost == 0.0) return "Any good with price 0.0"
+    if (minCost == 0.0) return ""
     return nameProductList[priceList.indexOf(minCost)]
 }
 
