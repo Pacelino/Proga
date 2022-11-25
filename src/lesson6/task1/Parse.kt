@@ -2,6 +2,7 @@
 
 package lesson6.task1
 
+import lesson3.task1.collatzSteps
 import lesson8.task2.rookMoveNumber
 import kotlin.math.max
 
@@ -176,18 +177,18 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  */
 fun mostExpensive(description: String): String {
     if (!Regex("""\S+ \d+(\.\d+)?(; \S+ \d+(\.\d+)?)*""").matches(description)) return ""
-    val products = description.split("; ")
-    var maxCost = Int.MIN_VALUE.toDouble()
-    var maxCostName = ""
-    for (i in products) {
+    val nameProductList = mutableListOf<String>()
+    val priceList = mutableListOf<Double>()
+    val costRegex = Regex("""(\d+(\.\d+)?)""").findAll(description)
+    for (i in costRegex) priceList.add(i.value.toDouble())
+    val ProductList = description.split("; ")
+    for (i in ProductList) {
         if (i == "") break
-        val product = i.trim().split(" ")
-        if (product[1].toDouble() > maxCost) {
-            maxCost = product[1].toDouble()
-            maxCostName = product[0]
-        }
+        val nameProduct = i.split(" ")[0]
+        nameProductList.add(nameProduct.toString())
     }
-    return maxCostName
+    val minCost = priceList.max()
+    return nameProductList[priceList.indexOf(minCost)]
 }
 
 /**
