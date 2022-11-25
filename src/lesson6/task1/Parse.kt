@@ -179,7 +179,8 @@ fun mostExpensive(description: String): String {
     if (!Regex("""\S+ \d+(\.\d+)?(; \S+ \d+(\.\d+)?)*""").matches(description)) return ""
     val nameProductList = mutableListOf<String>()
     val priceList = mutableListOf<Double>()
-    val costRegex = Regex("""(\d+(\.\d+)?)""").findAll(description)
+    val costRegex = Regex("""(\W\d+(\.\d+)?)""").findAll(description)
+
     for (i in costRegex) priceList.add(i.value.toDouble())
     val ProductList = description.split("; ")
     for (i in ProductList) {
@@ -187,7 +188,9 @@ fun mostExpensive(description: String): String {
         val nameProduct = i.split(" ")[0]
         nameProductList.add(nameProduct.toString())
     }
+    println("название: $nameProductList цена: $priceList")
     val minCost = priceList.max()
+    if (minCost == 0.0) return "Any good with price 0.0"
     return nameProductList[priceList.indexOf(minCost)]
 }
 
