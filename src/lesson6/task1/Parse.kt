@@ -173,24 +173,20 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * а цена отделена от названия следующего товара точкой с запятой и пробелом.
  * Вернуть название самого дорогого товара в списке (в примере это Курица),
  * или пустую строку при нарушении формата строки.
- * Все цены должны быть больше нуля либо равны нулю.
+ * Все цены должны быть больше нуля либо равны нулю. [^a-zA-z0-9"'] [^a-zA-z0-9"']\d+(\.\d+)?
  */
 fun mostExpensive(description: String): String {
     if (!Regex("""\S+ \d+(\.\d+)?(; \S+ \d+(\.\d+)?)*""").matches(description)) return ""
     val nameProductList = mutableListOf<String>()
     val priceList = mutableListOf<Double>()
-    val costRegex = Regex("""(\W\d+(\.\d+)?)""").findAll(description)
-
-    for (i in costRegex) priceList.add(i.value.toDouble())
     val ProductList = description.split("; ")
+    for (i in ProductList) priceList.add(i.split(" ")[1].toDouble())
     for (i in ProductList) {
         if (i == "") break
-        val nameProduct = i.split(" ")[0]
-        nameProductList.add(nameProduct.toString())
+        nameProductList.add(i.split(" ")[0].toString())
     }
-    println("название: $nameProductList цена: $priceList")
-    val minCost = priceList.max()
-    return nameProductList[priceList.indexOf(minCost)]
+    val maxCost = priceList.max()
+    return nameProductList[priceList.indexOf(maxCost)]
 }
 
 /**
