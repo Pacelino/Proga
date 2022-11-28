@@ -2,6 +2,7 @@
 
 package lesson7.task1
 
+import ru.spbstu.wheels.NullableMonad.map
 import java.io.File
 
 // Урок 7: работа с файлами
@@ -66,8 +67,10 @@ fun deleteMarked(inputName: String, outputName: String) {
     val reader = File(inputName).readLines()
     val writer = File(outputName).bufferedWriter()
     for (i in reader) {
-        if (!i.startsWith('_')) {writer.write(i)
-            writer.newLine()}
+        if (!i.startsWith('_')) {
+            writer.write(i)
+            writer.newLine()
+        }
     }
     writer.close()
 
@@ -82,7 +85,19 @@ fun deleteMarked(inputName: String, outputName: String) {
  * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
  *
  */
-fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
+fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
+    val result = mutableMapOf<String, Int>()
+    var findRegex = mutableListOf<MatchResult>()
+    val reader = File(inputName).readLines()
+    for (string in substrings) {
+        result[string] = 0
+        for (line in reader) {
+            findRegex = Regex("(?=\\$string)", RegexOption.IGNORE_CASE).findAll(line).toMutableList()
+            result[string] = result[string]!! + findRegex.count()
+        }
+    }
+    return result
+}
 
 
 /**
