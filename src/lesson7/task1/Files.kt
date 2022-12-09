@@ -117,6 +117,7 @@ fun sibilants(inputName: String, outputName: String) {
     TODO()
 }
 
+
 /**
  * Средняя (15 баллов)
  *
@@ -135,7 +136,17 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    val reader = File(inputName).readLines()
+    val maxString = reader.maxBy { it.trim().length }
+    val maxSize = maxString.length
+    val writer = File(outputName).bufferedWriter()
+    var s: String
+    for (line in reader) {
+        s = " ".repeat(maxSize / 2 - line.trim().length / 2) + line.trim()
+        writer.write(s)
+        writer.newLine()
+    }
+    writer.close()
 }
 
 /**
@@ -470,7 +481,5 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
  * Используемые пробелы, отступы и дефисы должны в точности соответствовать примеру.
  *
  */
-fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    TODO()
-}
+fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {}
 
