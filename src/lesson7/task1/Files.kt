@@ -138,21 +138,17 @@ fun sibilants(inputName: String, outputName: String) {
  */
 fun centerFile(inputName: String, outputName: String) {
     val reader = File(inputName).readLines()
-    val maxString = reader.maxBy { it.trim().length }
-    val maxSize = maxString.length
+    val maxString = reader.maxByOrNull { it.trim().length }
+    val maxSize = maxString?.length ?: 0
     val writer = File(outputName).bufferedWriter()
     var s: String
-    try {
-        for (line in reader) {
-            s = " ".repeat(maxSize / 2 - line.trim().length / 2) + line.trim()
-            writer.write(s)
-            writer.newLine()
-        }
-    } catch (e: java.util.NoSuchElementException) {
-        writer.write("")
-    } finally {
-        writer.close()
+    if (maxSize == 0) writer.write("")
+    for (line in reader) {
+        s = " ".repeat(maxSize / 2 - line.trim().length / 2) + line.trim()
+        writer.write(s)
+        writer.newLine()
     }
+    writer.close()
 }
 
 
