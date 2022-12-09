@@ -141,14 +141,15 @@ fun centerFile(inputName: String, outputName: String) {
     val maxString = reader.maxByOrNull { it.trim().length }
     val maxSize = maxString?.length ?: 0
     val writer = File(outputName).bufferedWriter()
-    var s: String
+    var space: String
     if (maxSize == 0) {
         writer.write("")
         writer.close()
     } else {
         for (line in reader) {
-            s = " ".repeat(maxSize / 2 - line.trim().length / 2) + line.trim()
-            writer.write(s)
+            space = " ".repeat((maxSize - line.trim().length) / 2)
+            writer.write(space)
+            writer.write(line.trim())
             writer.newLine()
         }
     }
