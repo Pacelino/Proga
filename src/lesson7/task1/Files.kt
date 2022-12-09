@@ -153,8 +153,8 @@ fun centerFile(inputName: String, outputName: String) {
             s = " ".repeat(maxSize / 2 - line.trim().length / 2) + line.trim()
             writer.write(s)
             writer.newLine()
-            writer.close()
         }
+        writer.close()
     }
 }
 
