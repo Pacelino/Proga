@@ -147,14 +147,15 @@ fun centerFile(inputName: String, outputName: String) {
         writer.close()
     } else if (reader.size == 1) {
         reader.forEach { writer.write(it.trim()) }
-        } else {
+        writer.close()
+    } else {
         for (line in reader) {
-            s = " ".repeat((maxSize - line.trim().length) / 2) + line.trim()
+            s = " ".repeat(maxSize / 2 - line.trim().length / 2) + line.trim()
             writer.write(s)
             writer.newLine()
+            writer.close()
         }
     }
-    writer.close()
 }
 
 
