@@ -151,9 +151,9 @@ fun centerFile(inputName: String, outputName: String) {
             writer.write(s)
             writer.newLine()
         }
-        writer.close()
     } catch (e: NoSuchElementException) {
         writer.write("")
+    } finally {
         writer.close()
     }
 }
