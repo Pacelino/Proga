@@ -221,8 +221,9 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
     val maxEntry = m.values.sorted().reversed().filter { it != 1 }
     if (maxEntry.isNotEmpty()) {
         for ((k, v) in m) {
-            if (v == maxEntry[0]) result[k] = v
+            if (v in maxEntry) result[k] = v
         }
+        println(result)
         return result
     } else {
         return emptyMap()
