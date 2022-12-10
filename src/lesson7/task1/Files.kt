@@ -146,10 +146,10 @@ fun centerFile(inputName: String, outputName: String) {
     if (maxSize == 0) writer.write("")
     else {
         for (line in reader) {
-            n = maxSize / 2 - line.trim().length / 2
-            for (i in 1 .. n) {writer.write(" " + line.trim())
-//            writer.write(" ".repeat(maxSize / 2 - line.trim().length / 2))
-//            writer.write(line.trim())
+            if (reader.size == 1) writer.write(line.trim())
+            else {
+                writer.write(" ".repeat(maxSize / 2 - line.trim().length / 2))
+                writer.write(line.trim())
                 writer.newLine()
             }
         }
