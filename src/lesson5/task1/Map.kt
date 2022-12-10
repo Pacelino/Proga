@@ -2,6 +2,9 @@
 
 package lesson5.task1
 
+import ru.spbstu.wheels.NullableMonad.map
+import kotlin.math.max
+
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -167,7 +170,6 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
-
 /**
  * Средняя (4 балла)
  *
@@ -208,7 +210,24 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
+fun extractRepeats(list: List<String>): Map<String, Int> {
+    var m = mutableMapOf<String, Int>()
+    var result = mutableMapOf<String, Int>()
+    for (i in list) {
+        if (i in m) {
+            m[i] = m[i]!! + 1
+        } else m[i] = 1
+    }
+    val maxEntry = m.values.sorted().reversed().filter { it != 1 }
+    if (maxEntry.isNotEmpty()) {
+        for ((k, v) in m) {
+            if (v == maxEntry[0]) result[k] = v
+        }
+        return result
+    } else {
+        return emptyMap()
+    }
+}
 
 /**
  * Средняя (3 балла)
