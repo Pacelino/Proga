@@ -143,20 +143,15 @@ fun centerFile(inputName: String, outputName: String) {
     if (maxSize == 0) writer.write("")
     else {
         for (line in reader) {
-            if (reader.size == 1 || maxSize - line.trim().length <= 1) {
-                writer.write(line.trim())
-                writer.newLine()
-            } else {
-                n = maxSize / 2 - line.trim().length / 2
-                writer.write(" ".repeat(n))
-                writer.write(line.trim())
-                println(" ".repeat(n) + line.trim())
-                writer.newLine()
-            }
+            n = (maxSize - line.trim().length) / 2
+            writer.write(" ".repeat(n))
+            writer.write(line.trim())
+            writer.newLine()
         }
     }
     writer.close()
 }
+
 
 /**
  * Сложная (20 баллов)
