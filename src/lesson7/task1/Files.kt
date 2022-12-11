@@ -2,9 +2,7 @@
 
 package lesson7.task1
 
-import ru.spbstu.wheels.NullableMonad.map
 import java.io.File
-import java.util.NoSuchElementException
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -138,16 +136,17 @@ fun sibilants(inputName: String, outputName: String) {
  */
 fun centerFile(inputName: String, outputName: String) {
     val reader = File(inputName).readLines()
-    val maxString = reader.maxByOrNull { it.trim().length }
-    val maxSize = maxString?.length ?: 0
+    val maxSize = reader.maxOfOrNull { it.trim().length } ?: 0
     val writer = File(outputName).bufferedWriter()
     var s: String
     var n: Int
     if (maxSize == 0) writer.write("")
     else {
         for (line in reader) {
-            if (reader.size == 1) writer.write(line.trim())
-            else {
+            if (reader.size == 1 || maxSize - line.trim().length <= 1) {
+                writer.write(line.trim())
+                writer.newLine()
+            } else {
                 n = maxSize / 2 - line.trim().length / 2
                 writer.write(" ".repeat(n))
                 writer.write(line.trim())
