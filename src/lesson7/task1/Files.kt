@@ -182,7 +182,7 @@ fun centerFile(inputName: String, outputName: String) {
 fun alignFileByWidth(inputName: String, outputName: String) {
     val reader = File(inputName).readLines().map { it.trim() }
     val writer = File(outputName).bufferedWriter()
-    val lines = reader.map { it.trim() }
+    val lines = reader.map { Regex("""\s+""").replace(it.trim(), " ") }
     var pasteSpace = 0
     var rasp = 0
     val maxSize = lines.maxOfOrNull { it.length } ?: 0
@@ -195,11 +195,11 @@ fun alignFileByWidth(inputName: String, outputName: String) {
         }
         val words = i.split(' ')
         writer.write(words.map{
-            if (rasp <= 0) {
+            if (rasp < 1) {
                 it.padEnd(it.length + pasteSpace)
             } else {
                 rasp--
-                it.padEnd(it.length + pasteSpace + 1)
+                it.padEnd(it.length +pasteSpace + 1)
             }
         }.joinToString(" ").trim())
         writer.newLine()
