@@ -179,14 +179,14 @@ fun mostExpensive(description: String): String {
     if (!Regex("""\S+ \d+(\.\d+)?(; \S+ \d+(\.\d+)?)*""").matches(description)) return ""
     val nameProductList = mutableListOf<String>()
     val priceList = mutableListOf<Double>()
-    val ProductList = description.split("; ")
-    for (i in ProductList) priceList.add(i.split(" ")[1].toDouble())
+    val ProductList = description.split("; ") // список из срок "имя цена"
+    for (i in ProductList) priceList.add(i.split(" ")[1].toDouble()) // добавляем цены в отдельный список
     for (i in ProductList) {
         if (i == "") break
-        nameProductList.add(i.split(" ")[0].toString())
+        nameProductList.add(i.split(" ")[0].toString()) // добавляем имя товара в отдельный список
     }
-    val maxCost = priceList.max()
-    return nameProductList[priceList.indexOf(maxCost)]
+    val maxCost = priceList.max() // ищем максимальную цену
+    return nameProductList[priceList.indexOf(maxCost)] // возвращаем
 }
 
 /**

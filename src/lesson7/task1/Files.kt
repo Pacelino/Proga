@@ -66,7 +66,7 @@ fun deleteMarked(inputName: String, outputName: String) {
     val reader = File(inputName).readLines()
     val writer = File(outputName).bufferedWriter()
     for (i in reader) {
-        if (!i.startsWith('_')) {
+        if (!i.startsWith('_')) { // если строка не начинается с _ добавить в файл
             writer.write(i)
             writer.newLine()
         }
@@ -91,7 +91,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     for (string in substrings) {
         result[string] = 0
         for (line in reader) {
-            findRegex = Regex("(?=\\$string)", RegexOption.IGNORE_CASE).findAll(line).toMutableList()
+            findRegex = Regex("(?=\\$string)", RegexOption.IGNORE_CASE).findAll(line).toMutableList() // ищем вхождение строки игнорируя размер буквы
             result[string] = result[string]!! + findRegex.count()
         }
     }
@@ -136,13 +136,13 @@ fun sibilants(inputName: String, outputName: String) {
  */
 fun centerFile(inputName: String, outputName: String) {
     val reader = File(inputName).readLines()
-    val maxSize = reader.maxOfOrNull { it.trim().length } ?: 0
+    val maxSize = reader.maxOfOrNull { it.trim().length } ?: 0 // Длинна максимальной строки
     val writer = File(outputName).bufferedWriter()
     var n: Int
     if (maxSize == 0) writer.write("")
     else {
         for (line in reader) {
-            n = (maxSize - line.trim().length) / 2
+            n = (maxSize - line.trim().length) / 2 // количество доп пробелов
             writer.write(" ".repeat(n))
             writer.write(line.trim())
             writer.newLine()
@@ -182,19 +182,19 @@ fun centerFile(inputName: String, outputName: String) {
 fun alignFileByWidth(inputName: String, outputName: String) {
     val reader = File(inputName).readLines().map { it.trim() }
     val writer = File(outputName).bufferedWriter()
-    val lines = reader.map { Regex("""\s+""").replace(it.trim(), " ") }
+    val lines = reader.map { Regex("""\s+""").replace(it, " ") } // избавляюсь от лишних пробелов внутри строки
     var pasteSpace = 0
     var rasp = 0
-    val maxSize = lines.maxOfOrNull { it.length } ?: 0
+    val maxSize = lines.maxOfOrNull { it.length } ?: 0 // максимальное значение (самая длинная строка)
     if (maxSize == 0) writer.write("")
     for (i in lines) {
-        val spaces = i.sumBy { if (it == ' ') 1 else 0 }
+        val spaces = i.sumBy { if (it == ' ') 1 else 0 } // количество пробелов
         if (spaces > 0) {
-            pasteSpace = (maxSize - i.length) / spaces
-            rasp = (maxSize - i.length) % spaces
+            pasteSpace = (maxSize - i.length) / spaces // количество добавления пробелов к каждому
+            rasp = (maxSize - i.length) % spaces // остаток пробелов
         }
         val words = i.split(' ')
-        writer.write(words.map{
+        writer.write(words.map {
             if (rasp < 1) {
                 it.padEnd(it.length + pasteSpace)
             } else {

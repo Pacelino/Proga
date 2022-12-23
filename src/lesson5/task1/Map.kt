@@ -223,7 +223,6 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
         for ((k, v) in m) {
             if (v in maxEntry) result[k] = v
         }
-        println(result)
         return result
     } else {
         return emptyMap()
